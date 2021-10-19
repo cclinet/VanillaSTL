@@ -7,23 +7,24 @@
 #include <new>
 #include <type_traits>
 
-namespace Vanilla {
-    template<class T>
+namespace vanilla {
+    template<typename T>
     class allocator {
     public:
-        typedef T value_type;
-        typedef std::size_t size_type;
-        typedef std::ptrdiff_t difference_type;
-        typedef std::true_type propagate_on_container_move_assignment;
+        using difference_type = std::ptrdiff_t;
+        using propagate_on_container_move_assignment = std::true_type;
+        using value_type = T;
+        using size_type = std::size_t;
 
-        constexpr allocator() noexcept {}
 
-        constexpr allocator(const allocator &other) noexcept {}
+        constexpr allocator() noexcept = default;
 
-        template<class U>
+        constexpr allocator(const allocator &other) noexcept = default;
+
+        template<typename U>
         constexpr explicit allocator(const allocator<U> &other) noexcept {}
 
-        constexpr ~allocator() {}
+        constexpr ~allocator() = default;
 
         [[nodiscard]] constexpr T *allocate(std::size_t n) {
             if (std::numeric_limits<std::size_t>::max() / sizeof(T) < n)
