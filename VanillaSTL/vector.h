@@ -26,8 +26,8 @@ namespace vanilla {
 
     public:
         // 构造函数
-        constexpr vector() noexcept(noexcept(Allocator())) : al(Allocator()){};
-        constexpr explicit vector(const Allocator &alloc) noexcept : al(alloc){};
+        constexpr vector() noexcept(noexcept(Allocator())) : al(Allocator()), begin_(nullptr), end_(nullptr), cap_(nullptr){};
+        constexpr explicit vector(const Allocator &alloc) noexcept : al(alloc), begin_(nullptr), end_(nullptr), cap_(nullptr){};
         constexpr ~vector() {
             al.deallocate(begin_, cap_ - begin_);
         };
@@ -43,6 +43,25 @@ namespace vanilla {
         }
         constexpr iterator end() noexcept {
             return end_;
+        }
+        constexpr void push_back(const T &value) {
+            if (end_ != cap_) {
+                size_type count = capacity() + 1;
+                iterator new_begin_ = al.allocate(count);
+                std::uninitialized_move_n(begin_, count, new_begin_);
+                *(new_begin_ + count - 1) = value;
+                al.deallocate(begin_, count - 1);
+                begin_ = new_begin_;
+                cap_ = end_ = begin_ + count;
+            } else {
+            }
+        }
+
+        constexpr size_type capacity() const noexcept {
+            return cap_ - begin_;
+        }
+        constexpr size_type size() const noexcept {
+            return end_ - begin_;
         }
     };
 }// namespace vanilla
