@@ -38,12 +38,14 @@ namespace vanilla {
             std::uninitialized_fill_n(begin_, count, value);
             cap_ = end_ = begin_ + count;
         }
+
         constexpr iterator begin() noexcept {
             return begin_;
         }
         constexpr iterator end() noexcept {
             return end_;
         }
+
         constexpr void push_back(const T &value) {
             if (end_ != cap_) {
                 size_type count = capacity() + 1;
@@ -58,10 +60,19 @@ namespace vanilla {
         }
 
         constexpr size_type capacity() const noexcept {
-            return cap_ - begin_;
+            if (begin_) {
+                return cap_ - begin_;
+            }
+            return 0;
         }
         constexpr size_type size() const noexcept {
-            return end_ - begin_;
+            if (begin_) {
+                return end_ - begin_;
+            }
+            return 0;
+        }
+        [[nodiscard]] constexpr bool empty() const noexcept {
+            return (!begin_) || (end_ - begin_ == 0);
         }
     };
 }// namespace vanilla
