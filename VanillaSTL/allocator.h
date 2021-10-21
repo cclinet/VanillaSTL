@@ -51,6 +51,5 @@ namespace vanilla {
         }
     };
 
-
-}// namespace Vanilla
+}// namespace vanilla
 #endif//VANILLASTL_ALLOCATOR_H
