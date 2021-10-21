@@ -22,19 +22,19 @@ namespace vanilla {
         iterator begin_;// 表示目前使用空间的头部
         iterator end_;  // 表示目前使用空间的尾部
         iterator cap_;  // 表示目前储存空间的尾部
-        allocator_type alloc;
+        allocator_type al;
 
     public:
         // 构造函数
-        //        constexpr vector() noexcept(noexcept(Allocator())) = default;
-        //        constexpr explicit vector(const Allocator &alloc) noexcept = default;
+        constexpr vector() noexcept(noexcept(Allocator())) : al(Allocator()){};
+        constexpr explicit vector(const Allocator &alloc) noexcept : al(alloc){};
         constexpr ~vector() {
-            this->alloc.deallocate(begin_, cap_ - begin_);
+            al.deallocate(begin_, cap_ - begin_);
         };
         constexpr vector(size_type count,
                          const T &value,
-                         const Allocator &alloc = Allocator()) : alloc(alloc) {
-            begin_ = this->alloc.allocate(count);
+                         const Allocator &alloc = Allocator()) : al(alloc) {
+            begin_ = al.allocate(count);
             std::uninitialized_fill_n(begin_, count, value);
             cap_ = end_ = begin_ + count;
         }
