@@ -10,12 +10,12 @@ namespace vanilla::test {
             std::cout << i << ' ';
         }
         std::cout << std::endl;
-//        auto stdv2 = vanilla::vector<int>();
-//        stdv2.push_back(3);
-//        stdv.push_back(3);
-//        for (auto i : stdv) {
-//            std::cout << i << ' ';
-        }
+        //        auto stdv2 = vanilla::vector<int>();
+        //        stdv2.push_back(3);
+        //        stdv.push_back(3);
+        //        for (auto i : stdv) {
+        //            std::cout << i << ' ';
     }
+
 }// namespace vanilla::test
 #endif//VANILLASTL_VECTOR_TEST_H

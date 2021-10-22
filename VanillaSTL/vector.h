@@ -39,6 +39,21 @@ namespace vanilla {
             cap_ = end_ = begin_ + count;
         }
 
+        constexpr explicit vector(size_type count,
+                                  const Allocator &alloc = Allocator()) : vector(count, new T(), alloc){};
+
+        template<class InputIt, std::_RequireInputIter<InputIt>>
+        constexpr vector(InputIt first, InputIt last,
+                         const Allocator &alloc = Allocator()) : al(alloc) {}
+
+        constexpr vector(const vector &other) {}
+        constexpr vector(const vector &other, const Allocator &alloc) {}
+        constexpr vector(vector &&other) noexcept {};
+        constexpr vector(vector &&other, const Allocator &alloc){};
+        constexpr vector(std::initializer_list<T> init,
+                         const Allocator &alloc = Allocator()){};
+
+
         constexpr iterator begin() noexcept {
             return begin_;
         }
