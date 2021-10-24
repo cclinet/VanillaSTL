@@ -1,5 +1,8 @@
 #ifndef VANILLASTL_ARRAY_H
 #define VANILLASTL_ARRAY_H
+#include <cstddef>
+#include <iterator>
+#include <cstddef>
 namespace vanilla {
     template<typename T, std::size_t N>
     class array {
@@ -16,7 +19,6 @@ namespace vanilla {
         using reverse_iterator = std::reverse_iterator<iterator>;
         using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-    private:
         T data[N];
 
     public:
@@ -76,12 +78,12 @@ namespace vanilla {
         }
     };
 
-    template< class T, std::size_t N >
-    constexpr bool operator==( const std::array<T,N>& lhs,
-                              const std::array<T,N>& rhs ){};
-
-    template< class T, std::size_t N >
-    constexpr /* see below */ operator<=>( const std::array<T,N>& lhs,
-                                          const std::array<T,N>& rhs ){};
+//    template< class T, std::size_t N >
+//    constexpr bool operator==( const std::array<T,N>& lhs,
+//                              const std::array<T,N>& rhs ){return true;};
+//
+//    template< class T, std::size_t N >
+//    constexpr /* see below */ operator<=>( const std::array<T,N>& lhs,
+//                                          const std::array<T,N>& rhs ){return true;};
 }// namespace vanilla
 #endif//VANILLASTL_ARRAY_H

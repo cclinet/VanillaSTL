@@ -30,7 +30,7 @@ namespace vanilla {
             if (std::numeric_limits<std::size_t>::max() / sizeof(T) < n)
                 throw std::bad_array_new_length{};
 
-            if (auto p = static_cast<T *>(std::malloc(n * sizeof(T)))) {
+            if (auto p = static_cast<T *>(::operator new(n * sizeof(T)))) {
                 report(p, n);
                 return p;
             }
@@ -40,7 +40,7 @@ namespace vanilla {
 
         constexpr void deallocate(T *p, std::size_t n) noexcept {
             report(p, n, false);
-            std::free(p);
+            ::operator delete(p);
         }
 
     private:

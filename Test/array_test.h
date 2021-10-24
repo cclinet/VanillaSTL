@@ -2,6 +2,7 @@
 #define VANILLASTL_ARRAY_TEST_H
 #include "array.h"
 #include <iostream>
+#include <array>
 namespace vanilla::test {
     void array_test() {
         std::cout << "[===============================================================]\n";
@@ -17,6 +18,5 @@ namespace vanilla::test {
                         }
             std::cout << '\n'; }();
     }
-
 }// namespace vanilla::test
 #endif//VANILLASTL_ARRAY_TEST_H

@@ -1,6 +1,7 @@
 #ifndef VANILLASTL_VECTOR_H
 #define VANILLASTL_VECTOR_H
 #include <memory>
+#include "allocator.h"
 namespace vanilla {
     template<typename T,
              typename Allocator = vanilla::allocator<T>>
